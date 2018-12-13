@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/register.css"/>
+	</head>
+	<body>
+		<!--头部-->
+		<div class="search">
+			<div class="searchs">
+				<!--logo-->
+				<div class="search_one">
+					<a href="#"></a>
+				</div>
+				<!--logo右下的文字-->
+				<div class="search_two"></div>
+			</div>
+		</div>
+		<!--图片-->
+		<div class="pic">
+			<div class="pics"></div>
+			<div class="box">
+				<div class="boxTop">
+					<h2>新用户注册</h2>
+				</div>	
+				<div class="newPeople">
+					<p>注册即送<span>2600</span>元新人大礼包</p>
+				</div>
+				<div class="hydl">
+					<form>
+						<input name="phonea" class="inp i1" type="text" placeholder="请输入手机号"/>
+						<p class="error p1">请输入手机号</p>
+						<input name="pass" class="inp i2" type="text" placeholder="请输入验证码"/>
+						<div class="rightMa">
+							<span id="btn">2b63</span>
+						</div>
+						<p class="error p2">请输入正确的验证码</p>
+						<input  class="inp i3" type="text" placeholder="请输入验证码"/>
+						<a class="yanZheng" href="#">获取验证码</a>
+						<p class="error p3">请输入验证码</p>
+						<input class="inp i4" type="password" placeholder="请输入6-20个字符的密码" />
+						<p class="error p4">6-20个字符，由字母、数字和符号的两种以上组合</p>
+						<div class="yinBox">
+							<span class="s1"></span>
+							<span class="s2"></span>
+							<span class="s3"></span>
+						</div>
+					</form>
+				</div>
+				<div class="sjzl">
+					<p>
+						<span class="span1"></span>
+						我同意
+						<a href="#" target="_blank">
+							<span class="span2">《魅力惠使用条款》</span>
+						</a>
+					</p>
+				</div>
+				<div class="btn_last">
+					<a class="lastA" href="#">立即注册</a>
+				</div>
+				<div class="box_footer">
+					已注册, 
+					<a href="login.html" target="_blank">立即登录</a>
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		<div class="activity">
+				<div class="active">
+				<ul>
+					<li><a href="#">100%正品保证</a></li>
+					<li><a href="#">满688免运费</a></li>
+					<li><a href="#">7天无理由退货</a></li>
+					<li><a href="#">超价折扣</a></li>
+					<li><a href="#">9点限时闪购</a></li>
+					<li><a href="#">400-664-6698</a></li>
+				</ul>
+				<p>
+					<a href="#">关于魅力惠</a>
+					<a href="#">加入我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">使用帮助</a>
+					<a href="#">使用规则</a>
+					<a href="#">隐私声明</a>
+					<a href="#">网站地图</a>
+				</p>
+				<p id="lastP">
+					<span>COPYRIGHT©2016 杭州魅俪信息技术有限公司版权所有</span>
+					<span>浙ICP备16004860号-1</span>
+				</p>
+				<div class="active_bottom">
+					<a href="#"><img src="img/icon_badge.png"/></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script  type="text/javascript" src="js/register.js"></script>
+<script type="text/javascript" src="js/ajax1808.js"></script>
+<script type="text/javascript" src="js/cookieTools.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	function z(str){//#box .cls  p
+	if(str.charAt(0)=="#"){
+		return document.getElementById(str.substring(1));
+	}else if(str.charAt(0)=="."){
+		return document.getElementsByClassName(str.substring(1));
+	}else{
+		return document.getElementsByTagName(str);
+	}
+}	
+	//随机数
+	z("#btn").onclick=function(){
+		z("#btn").innerHTML=nn();
+	}
+	//注册页面
+	z(".lastA")[0].onclick=function(){
+		// console.log(1);
+		let xhr=new XMLHttpRequest();
+		xhr.open("post","php/register.php",true);
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				var str=xhr.responseText;
+				// console.log(str);
+				if(str=="1"){
+//					$(".result")[0].innerHTML="注册成功";
+//					getCookie("phone");
+					alert("注册成功");
+					location.href="login.html";
+
+				}else if(str=="-1"){
+//					$(".result")[0].innerHTML="用户名已存在";
+					alert("用户名已存在");
+				}
+			else{
+//				$(".result")[0].innerHTML="服务器出错";
+				alert("服务器出错");
+				}
+			}
+		}
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		let s="phonea="+z(".i1")[0].value+"&pass="+z(".i4")[0].value;
+		xhr.send(s);
+	}
+}
+
+function nn(){
+		var str="";
+		for(var i=0;i<4;i++){
+			str+=(parseInt(Math.random()*16)).toString(16);
+		}
+		return str;
+}
+
+</script>
